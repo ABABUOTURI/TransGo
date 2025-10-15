@@ -1,18 +1,27 @@
 "use client";
 
-import { useState } from "react";
-import Loader from "../components/Loader";
+// import TopNav from "@/components/TopNav";
+import HeroSection from "@/components/HeroSection";
+import AboutSection from "@/components/AboutSection";
+// import HowItWorks from "@/components/HowItWorks";
+// import ServicesSection from "@/components/ServicesSection";
+// import Testimonials from "@/components/Testimonials";
+// import ContactSection from "@/components/ContactSection";
+// import Footer from "@/components/Footer";
+// import BackToTop from "@/components/BackToTop";
 
 export default function Home() {
-  const [loadingDone, setLoadingDone] = useState(false);
-
-  if (!loadingDone) {
-    return <Loader onFinish={() => setLoadingDone(true)} />;
-  }
-
   return (
-    <main className="flex h-screen items-center justify-center bg-white text-[#800000] text-3xl font-bold">
-      Welcome to TransGo 🚛
+    <main className="flex flex-col bg-white">
+      {/* <TopNav /> */}
+      <HeroSection />
+      <AboutSection />
+      {/* <HowItWorks />
+      <ServicesSection />
+      <Testimonials />
+      <ContactSection />
+      <Footer />
+      <BackToTop /> */}
     </main>
   );
 }

@@ -1,6 +1,9 @@
 {
   "name": "transgoweb",
   "version": "0.1.0",
+  "type": "module",
+  "author": "TransGo",
+  "license": "MIT",
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
@@ -10,9 +13,11 @@
   },
   "dependencies": {
     "framer-motion": "^12.23.24",
+    "lucide-react": "^0.545.0",
     "next": "15.5.4",
     "react": "19.1.0",
-    "react-dom": "19.1.0"
+    "react-dom": "19.1.0",
+    "react-scroll": "^1.9.3"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
