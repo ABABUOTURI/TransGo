@@ -84,7 +84,6 @@ export default function HowItWorks() {
             >
               {/* Section Header */}
               <div className="text-center mb-6 sm:mb-8">
-                <div className="text-4xl sm:text-5xl mb-3">{section.icon}</div>
                 <h3 className="text-xl sm:text-2xl font-bold text-red-800">
                   {section.title}
                 </h3>
