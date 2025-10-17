@@ -145,7 +145,7 @@ export default function LoginPage() {
             </a>
 
             <a
-              href="/fleet/register"
+              href="/owner-signup"
               className="flex-1 text-center py-2  text-gray-700 font-semibold rounded-lg hover:bg-gray-50 transition-colors duration-300 w-full"
             >
               Fleet Owner?
