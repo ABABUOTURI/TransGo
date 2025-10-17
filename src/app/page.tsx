@@ -9,6 +9,7 @@ import HowItWorks from "@/components/HowItWorks";
 import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
 import BackToTop from "@/components/BackToTop";
+import PortalAccess from "@/components/PortalAccess";
 
 export default function Home() {
   return (
@@ -16,6 +17,7 @@ export default function Home() {
       <TopNav />
       <HeroSection />
       <AboutSection />
+      <PortalAccess />
       <HowItWorks />
       {/* <ServicesSection /> */}
       {/* <Testimonials /> */}
