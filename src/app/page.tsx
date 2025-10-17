@@ -10,6 +10,7 @@ import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
 import BackToTop from "@/components/BackToTop";
 import PortalAccess from "@/components/PortalAccess";
+import DriverOnboarding from "@/components/DriverOnboarding";
 
 export default function Home() {
   return (
@@ -17,8 +18,9 @@ export default function Home() {
       <TopNav />
       <HeroSection />
       <AboutSection />
-      <PortalAccess />
       <HowItWorks />
+      <PortalAccess />
+      <DriverOnboarding />
       {/* <ServicesSection /> */}
       {/* <Testimonials /> */}
       {/* <ContactSection /> */}
