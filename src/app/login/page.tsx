@@ -1,12 +1,13 @@
 "use client";
 import { useState } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { Mail, Lock, Eye, EyeOff, ArrowLeft } from "lucide-react";
 
 export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [modalType, setModalType] = useState<"terms" | "privacy" | null>(null);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -14,8 +15,8 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-red-50 via-white to-gray-50 flex items-center justify-center px-4 py-8 sm:px-6 lg:px-8">
-      {/* Back to Home Button */}
+    <div className="min-h-screen bg-gradient-to-br from-red-50 via-white to-gray-50 flex items-center justify-center px-4 py-8 sm:px-6 lg:px-8 relative">
+      {/* === Back to Home Button === */}
       <a
         href="/#hero"
         className="fixed top-4 left-4 sm:top-6 sm:left-6 z-50 flex items-center gap-2 text-red-800 hover:text-red-900 font-semibold transition-colors group"
@@ -24,7 +25,86 @@ export default function LoginPage() {
         <span className="hidden sm:inline">Back</span>
       </a>
 
-      {/* Login Container */}
+      {/* === Modal for Terms / Privacy === */}
+      <AnimatePresence>
+        {modalType && (
+          <motion.div
+            key="modal"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center backdrop-blur-xl bg-black/40 px-4"
+          >
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              className="relative bg-black/60 text-white rounded-2xl shadow-2xl w-full max-w-lg p-6 sm:p-8 border border-white/20"
+            >
+              <h2 className="text-lg sm:text-xl font-semibold mb-3 text-center text-red-300">
+                {modalType === "terms"
+                  ? "TransGo Terms of Service"
+                  : "Privacy Policy"}
+              </h2>
+
+              <div className="max-h-72 overflow-y-auto text-sm text-gray-200 space-y-3 leading-relaxed">
+                {modalType === "terms" ? (
+                  <>
+                    <p>
+                      By accessing and using TransGo, you agree to comply with
+                      all applicable transport laws and to provide accurate
+                      account information.
+                    </p>
+                    <p>
+                      You must not misuse the platform for fraudulent or illegal
+                      activities. TransGo reserves the right to suspend accounts
+                      that violate these terms.
+                    </p>
+                    <p>
+                      For full documentation, please contact
+                      <span className="text-red-300"> support@transgo.com</span>.
+                    </p>
+                  </>
+                ) : (
+                  <>
+                    <p>
+                      TransGo collects essential user data only for identity
+                      verification, communication, and operational purposes.
+                    </p>
+                    <p>
+                      Your data is securely stored and will never be shared with
+                      third parties without your consent unless required by law.
+                    </p>
+                    <p>
+                      You may request your data deletion or updates by emailing
+                      <span className="text-red-300"> support@transgo.com</span>.
+                    </p>
+                  </>
+                )}
+              </div>
+
+              <button
+                onClick={() => setModalType(null)}
+                className="absolute top-3 right-4 text-gray-300 hover:text-white text-xl font-bold"
+              >
+                ×
+              </button>
+
+              <div className="flex justify-center mt-5">
+                <button
+                  onClick={() => setModalType(null)}
+                  className="px-5 py-2 bg-red-700 text-white rounded-lg hover:bg-red-800 transition-colors text-sm font-semibold"
+                >
+                  Back
+                </button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* === Login Container === */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -44,7 +124,7 @@ export default function LoginPage() {
           {/* Header */}
           <div className="text-center mb-8">
             <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">
-              Login to Transgo
+              Login to TransGo
             </h1>
             <p className="text-sm sm:text-base text-gray-600">
               Access your account (Customer, Fleet Owner, Admin)
@@ -52,7 +132,7 @@ export default function LoginPage() {
           </div>
 
           {/* Login Form */}
-          <div className="space-y-5">
+          <form onSubmit={handleSubmit} className="space-y-5">
             <div>
               <label
                 htmlFor="email"
@@ -68,7 +148,7 @@ export default function LoginPage() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="Enter your email"
-                  className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all outline-none text-gray-900"
+                  className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent outline-none text-gray-900"
                 />
               </div>
             </div>
@@ -88,18 +168,14 @@ export default function LoginPage() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="Enter your password"
-                  className="w-full pl-10 pr-12 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all outline-none text-gray-900"
+                  className="w-full pl-10 pr-12 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent outline-none text-gray-900"
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
                   className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors"
                 >
-                  {showPassword ? (
-                    <EyeOff className="w-5 h-5" />
-                  ) : (
-                    <Eye className="w-5 h-5" />
-                  )}
+                  {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
                 </button>
               </div>
             </div>
@@ -114,14 +190,14 @@ export default function LoginPage() {
             </div>
 
             <motion.button
-              onClick={handleSubmit}
+              type="submit"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
               className="w-full bg-red-800 text-white font-semibold py-3 rounded-lg hover:bg-red-900 transition-colors duration-300 shadow-lg hover:shadow-xl"
             >
               Log In
             </motion.button>
-          </div>
+          </form>
 
           {/* Divider */}
           <div className="relative my-8">
@@ -135,47 +211,48 @@ export default function LoginPage() {
             </div>
           </div>
 
-          {/* Additional Links — horizontally arranged */}
+          {/* Additional Links */}
           <div className="flex flex-col sm:flex-row justify-between items-center gap-3 sm:gap-4">
             <a
               href="/signup/customer"
-              className="flex-1 text-center py-2  text-red-800 font-semibold rounded-lg hover:bg-red-50 transition-colors duration-300 w-full"
+              className="flex-1 text-center py-2 text-red-800 font-semibold rounded-lg hover:bg-red-50 transition-colors duration-300"
             >
               New Customer?
             </a>
-
             <a
               href="/owner-signup"
-              className="flex-1 text-center py-2  text-gray-700 font-semibold rounded-lg hover:bg-gray-50 transition-colors duration-300 w-full"
+              className="flex-1 text-center py-2 text-gray-700 font-semibold rounded-lg hover:bg-gray-50 transition-colors duration-300"
             >
               Fleet Owner?
             </a>
-
             <a
               href="/driver/portal"
-              className="flex-1 text-center py-2  text-gray-700 font-semibold rounded-lg hover:bg-gray-50 transition-colors duration-300 w-full"
+              className="flex-1 text-center py-2 text-gray-700 font-semibold rounded-lg hover:bg-gray-50 transition-colors duration-300"
             >
               Driver?
             </a>
           </div>
         </div>
 
-        {/* Footer Note */}
+        {/* Footer */}
         <p className="text-center text-sm text-gray-600 mt-6">
           By logging in, you agree to our{" "}
-          <a
-            href="/terms"
-            className="text-red-800 hover:text-red-900 font-medium"
+          <button
+            type="button"
+            onClick={() => setModalType("terms")}
+            className="text-red-800 hover:text-red-900 font-medium underline"
           >
             Terms of Service
-          </a>{" "}
+          </button>{" "}
           and{" "}
-          <a
-            href="/privacy"
-            className="text-red-800 hover:text-red-900 font-medium"
+          <button
+            type="button"
+            onClick={() => setModalType("privacy")}
+            className="text-red-800 hover:text-red-900 font-medium underline"
           >
             Privacy Policy
-          </a>
+          </button>
+          .
         </p>
       </motion.div>
     </div>
