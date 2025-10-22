@@ -138,7 +138,7 @@ export default function LoginPage() {
           {/* Additional Links — horizontally arranged */}
           <div className="flex flex-col sm:flex-row justify-between items-center gap-3 sm:gap-4">
             <a
-              href="/signup"
+              href="/signup/customer"
               className="flex-1 text-center py-2  text-red-800 font-semibold rounded-lg hover:bg-red-50 transition-colors duration-300 w-full"
             >
               New Customer?
