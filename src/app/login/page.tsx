@@ -226,7 +226,7 @@ export default function LoginPage() {
               Fleet Owner?
             </a>
             <a
-              href="/driver/portal"
+              href="/signup/driver"
               className="flex-1 text-center py-2 text-gray-700 font-semibold rounded-lg hover:bg-gray-50 transition-colors duration-300"
             >
               Driver?
