@@ -1,13 +1,99 @@
 "use client";
 
 import { useState } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function FleetOwnerSignup() {
   const [ownerType, setOwnerType] = useState("individual");
+  const [modalType, setModalType] = useState<"terms" | "privacy" | null>(null);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-red-50 via-white to-gray-50 flex items-center justify-center px-4 py-10 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-gradient-to-br from-red-50 via-white to-gray-50 flex items-center justify-center px-4 py-10 sm:px-6 lg:px-8 relative">
+      {/* === Terms / Privacy Modal === */}
+      <AnimatePresence>
+        {modalType && (
+          <motion.div
+            key="modal"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center px-4"
+          >
+            <motion.div
+              initial={{ y: 50, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              exit={{ y: 50, opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              className="backdrop-blur-xl bg-black/40 rounded-lg shadow-2xl w-full max-w-lg p-6 sm:p-8 relative"
+            >
+              <h2 className="text-lg sm:text-xl font-semibold text-white mb-3">
+                {modalType === "terms"
+                  ? "Service Provider Terms & Conditions"
+                  : "Privacy Policy"}
+              </h2>
+              <div className="max-h-72 overflow-y-auto text-sm text-white space-y-3">
+                {modalType === "terms" ? (
+                  <>
+                    <p>
+                      By using TransGo’s platform, you agree to manage your
+                      fleet, drivers, and vehicle information responsibly. You
+                      shall not misuse the platform for fraudulent or unlawful
+                      purposes.
+                    </p>
+                    <p>
+                      You are responsible for ensuring that all uploaded driver
+                      and vehicle details are accurate and compliant with
+                      government transport regulations.
+                    </p>
+                    <p>
+                      TransGo reserves the right to suspend or terminate
+                      accounts found in violation of these terms.
+                    </p>
+                    <p>
+                      For full documentation, please contact
+                      support@transgo.com.
+                    </p>
+                  </>
+                ) : (
+                  <>
+                    <p>
+                      TransGo collects limited personal information necessary
+                      for registration, identity verification, and communication
+                      purposes.
+                    </p>
+                    <p>
+                      Your data will never be sold or shared with third parties
+                      without your consent, except as required by law.
+                    </p>
+                    <p>
+                      You may request data deletion or updates by contacting
+                      support@transgo.com.
+                    </p>
+                  </>
+                )}
+              </div>
+
+              <button
+                onClick={() => setModalType(null)}
+                className="absolute top-3 right-3 text-gray-500 hover:text-red-800 text-xl font-bold"
+              >
+                ×
+              </button>
+
+              <div className="flex justify-center mt-5">
+                <button
+                  onClick={() => setModalType(null)}
+                  className="px-5 py-2 bg-red-800 text-white rounded-lg hover:bg-red-900 text-sm"
+                >
+                  Back
+                </button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* === Signup Card === */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -26,12 +112,12 @@ export default function FleetOwnerSignup() {
           </h1>
           <p className="text-xs sm:text-sm text-gray-600">
             Register to manage your vehicles and drivers on{" "}
-            <span className="text-red-800 font-semibold">Transgo</span>.
+            <span className="text-red-800 font-semibold">TransGo</span>.
           </p>
         </div>
 
         <form className="space-y-4">
-          {/* === Owner Type Selection === */}
+          {/* === Owner Type === */}
           <div>
             <label className="block text-xs font-medium text-gray-700 mb-2">
               Owner Type
@@ -77,7 +163,7 @@ export default function FleetOwnerSignup() {
             </div>
           </div>
 
-          {/* === Contact Person Details === */}
+          {/* === Contact Details === */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
               <label className="block text-xs font-medium text-gray-700 mb-1">
@@ -86,7 +172,7 @@ export default function FleetOwnerSignup() {
               <input
                 type="text"
                 placeholder="Enter first name"
-                className="w-full border border-gray-300 rounded-lg py-2.5 px-3 text-sm focus:ring-2 focus:ring-red-500 outline-none text-gray-900"
+                className="w-full border border-gray-300 rounded-lg py-2 px-3 text-sm focus:ring-2 focus:ring-red-500 outline-none text-gray-900"
               />
             </div>
             <div>
@@ -96,7 +182,7 @@ export default function FleetOwnerSignup() {
               <input
                 type="text"
                 placeholder="Enter last name"
-                className="w-full border border-gray-300 rounded-lg py-2.5 px-3 text-sm focus:ring-2 focus:ring-red-500 outline-none text-gray-900"
+                className="w-full border border-gray-300 rounded-lg py-2 px-3 text-sm focus:ring-2 focus:ring-red-500 outline-none text-gray-900"
               />
             </div>
           </div>
@@ -111,7 +197,7 @@ export default function FleetOwnerSignup() {
                 <input
                   type="text"
                   placeholder="e.g., John Doe"
-                  className="w-full border border-gray-300 rounded-lg py-2.5 px-3 text-sm focus:ring-2 focus:ring-red-500 outline-none text-gray-900"
+                  className="w-full border border-gray-300 rounded-lg py-2 px-3 text-sm focus:ring-2 focus:ring-red-500 outline-none text-gray-900"
                 />
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -122,7 +208,7 @@ export default function FleetOwnerSignup() {
                   <input
                     type="text"
                     placeholder="Enter your ID or Passport number"
-                    className="w-full border border-gray-300 rounded-lg py-2.5 px-3 text-sm focus:ring-2 focus:ring-red-500 outline-none text-gray-900"
+                    className="w-full border border-gray-300 rounded-lg py-2 px-3 text-sm focus:ring-2 focus:ring-red-500 outline-none text-gray-900"
                   />
                 </div>
                 <div>
@@ -132,7 +218,7 @@ export default function FleetOwnerSignup() {
                   <input
                     type="file"
                     accept=".jpg,.jpeg,.png,.pdf"
-                    className="w-full border border-gray-300 rounded-lg py-1.5 px-2 text-xs text-gray-700"
+                    className="w-full border border-gray-300 rounded-lg py-1 px-2 text-xs text-gray-700"
                   />
                 </div>
               </div>
@@ -152,7 +238,7 @@ export default function FleetOwnerSignup() {
                 <input
                   type="email"
                   placeholder="your.email@example.com"
-                  className="w-full border border-gray-300 rounded-lg py-2.5 px-3 text-sm focus:ring-2 focus:ring-red-500 outline-none text-gray-900"
+                  className="w-full border border-gray-300 rounded-lg py-2 px-3 text-sm focus:ring-2 focus:ring-red-500 outline-none text-gray-900"
                 />
               </div>
               <div>
@@ -162,7 +248,7 @@ export default function FleetOwnerSignup() {
                 <input
                   type="text"
                   placeholder="e.g., 0712345678"
-                  className="w-full border border-gray-300 rounded-lg py-2.5 px-3 text-sm focus:ring-2 focus:ring-red-500 outline-none text-gray-900"
+                  className="w-full border border-gray-300 rounded-lg py-2 px-3 text-sm focus:ring-2 focus:ring-red-500 outline-none text-gray-900"
                 />
               </div>
             </div>
@@ -175,7 +261,7 @@ export default function FleetOwnerSignup() {
                 <input
                   type="password"
                   placeholder="Choose a strong password"
-                  className="w-full border border-gray-300 rounded-lg py-2.5 px-3 text-sm focus:ring-2 focus:ring-red-500 outline-none text-gray-900"
+                  className="w-full border border-gray-300 rounded-lg py-2 px-3 text-sm focus:ring-2 focus:ring-red-500 outline-none text-gray-900"
                 />
               </div>
               <div>
@@ -185,7 +271,7 @@ export default function FleetOwnerSignup() {
                 <input
                   type="password"
                   placeholder="Re-enter your password"
-                  className="w-full border border-gray-300 rounded-lg py-2.5 px-3 text-sm focus:ring-2 focus:ring-red-500 outline-none text-gray-900"
+                  className="w-full border border-gray-300 rounded-lg py-2 px-3 text-sm focus:ring-2 focus:ring-red-500 outline-none text-gray-900"
                 />
               </div>
             </div>
@@ -200,24 +286,26 @@ export default function FleetOwnerSignup() {
             />
             <label htmlFor="terms" className="text-xs text-gray-700 leading-snug">
               I agree to the{" "}
-              <a
-                href="/terms/provider"
-                className="text-red-800 hover:text-red-900 font-medium"
+              <button
+                type="button"
+                onClick={() => setModalType("terms")}
+                className="text-red-800 hover:text-red-900 font-medium underline"
               >
                 TransGo Service Provider Terms & Conditions
-              </a>{" "}
+              </button>{" "}
               and{" "}
-              <a
-                href="/privacy"
-                className="text-red-800 hover:text-red-900 font-medium"
+              <button
+                type="button"
+                onClick={() => setModalType("privacy")}
+                className="text-red-800 hover:text-red-900 font-medium underline"
               >
                 Privacy Policy
-              </a>
+              </button>
               .
             </label>
           </div>
 
-          {/* === Submit Button === */}
+          {/* === Submit === */}
           <motion.button
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
@@ -227,7 +315,7 @@ export default function FleetOwnerSignup() {
           </motion.button>
         </form>
 
-        {/* === Footer Note === */}
+        {/* === Footer === */}
         <p className="text-center text-xs text-gray-600 mt-4">
           Already have an account?{" "}
           <a
