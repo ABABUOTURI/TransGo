@@ -1,22 +1,65 @@
 "use client";
+
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Mail, Lock, Eye, EyeOff, ArrowLeft } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 export default function LoginPage() {
+  const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
   const [modalType, setModalType] = useState<"terms" | "privacy" | null>(null);
+
+  // === Dummy Users ===
+  const dummyUsers = [
+    {
+      role: "customer",
+      email: "customer1@gmail.com",
+      password: "customer1",
+      redirect: "/customer-dashboard",
+    },
+    {
+      role: "driver",
+      email: "driver1@gmail.com",
+      password: "driver1",
+      redirect: "/driver-dashboard",
+    },
+    {
+      role: "owner",
+      email: "owner1@gmail.com",
+      password: "owner1",
+      redirect: "/owner-dashboard",
+    },
+    {
+      role: "admin",
+      email: "admin@transgo.com",
+      password: "admin123",
+      redirect: "/admin",
+    },
+  ];
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Login attempt:", { email, password });
+
+    const foundUser = dummyUsers.find(
+      (user) => user.email === email && user.password === password
+    );
+
+    if (foundUser) {
+      console.log(`✅ Logged in as ${foundUser.role}`);
+      setError("");
+      router.push(foundUser.redirect);
+    } else {
+      setError("Invalid email or password. Please try again.");
+    }
   };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-red-50 via-white to-gray-50 flex items-center justify-center px-4 py-8 sm:px-6 lg:px-8 relative">
-      {/* === Back to Home Button === */}
+      {/* === Back Button === */}
       <a
         href="/#hero"
         className="fixed top-4 left-4 sm:top-6 sm:left-6 z-50 flex items-center gap-2 text-red-800 hover:text-red-900 font-semibold transition-colors group"
@@ -53,32 +96,30 @@ export default function LoginPage() {
                   <>
                     <p>
                       By accessing and using TransGo, you agree to comply with
-                      all applicable transport laws and to provide accurate
-                      account information.
+                      all applicable transport laws and provide accurate
+                      information.
                     </p>
                     <p>
                       You must not misuse the platform for fraudulent or illegal
-                      activities. TransGo reserves the right to suspend accounts
-                      that violate these terms.
+                      activities. TransGo reserves the right to suspend violators.
                     </p>
                     <p>
-                      For full documentation, please contact
-                      <span className="text-red-300"> support@transgo.com</span>.
+                      Contact <span className="text-red-300">support@transgo.com</span> for inquiries.
                     </p>
                   </>
                 ) : (
                   <>
                     <p>
-                      TransGo collects essential user data only for identity
-                      verification, communication, and operational purposes.
+                      TransGo collects essential user data for identity
+                      verification, communication, and operations.
                     </p>
                     <p>
-                      Your data is securely stored and will never be shared with
-                      third parties without your consent unless required by law.
+                      Data is securely stored and never shared without consent
+                      unless required by law.
                     </p>
                     <p>
-                      You may request your data deletion or updates by emailing
-                      <span className="text-red-300"> support@transgo.com</span>.
+                      For data requests, email{" "}
+                      <span className="text-red-300">support@transgo.com</span>.
                     </p>
                   </>
                 )}
@@ -104,7 +145,7 @@ export default function LoginPage() {
         )}
       </AnimatePresence>
 
-      {/* === Login Container === */}
+      {/* === Login Card === */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -116,7 +157,7 @@ export default function LoginPage() {
           <div className="flex justify-center mb-6">
             <img
               src="/logo.png"
-              alt="Transgo Logo"
+              alt="TransGo Logo"
               className="w-16 h-16 sm:w-20 sm:h-20"
             />
           </div>
@@ -127,9 +168,16 @@ export default function LoginPage() {
               Login to TransGo
             </h1>
             <p className="text-sm sm:text-base text-gray-600">
-              Access your account (Customer, Fleet Owner, Admin)
+              Access your account (Customer, Fleet Owner, Driver, or Admin)
             </p>
           </div>
+
+          {/* Error Message */}
+          {error && (
+            <div className="bg-red-100 text-red-700 text-sm py-2 px-3 rounded-lg mb-4 text-center border border-red-200">
+              {error}
+            </div>
+          )}
 
           {/* Login Form */}
           <form onSubmit={handleSubmit} className="space-y-5">
@@ -148,6 +196,7 @@ export default function LoginPage() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="Enter your email"
+                  required
                   className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent outline-none text-gray-900"
                 />
               </div>
@@ -168,6 +217,7 @@ export default function LoginPage() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="Enter your password"
+                  required
                   className="w-full pl-10 pr-12 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent outline-none text-gray-900"
                 />
                 <button
@@ -206,12 +256,12 @@ export default function LoginPage() {
             </div>
             <div className="relative flex justify-center text-sm">
               <span className="px-4 bg-white text-gray-500">
-                Don't have an account?
+                Don’t have an account?
               </span>
             </div>
           </div>
 
-          {/* Additional Links */}
+          {/* Signup Links */}
           <div className="flex flex-col sm:flex-row justify-between items-center gap-3 sm:gap-4">
             <a
               href="/signup/customer"
