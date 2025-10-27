@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { Truck, Users, MapPinned, DollarSign } from "lucide-react";
 import {
@@ -20,8 +21,8 @@ export default function DashboardContent() {
     { label: "Revenue (KES)", value: "245,000", icon: DollarSign },
   ];
 
-  // === Mock Data for Chart ===
-  const tripData = [
+  // === Mock Data ===
+  const weeklyData = [
     { day: "Mon", trips: 8 },
     { day: "Tue", trips: 12 },
     { day: "Wed", trips: 9 },
@@ -31,10 +32,18 @@ export default function DashboardContent() {
     { day: "Sun", trips: 4 },
   ];
 
+  const monthlyData = [
+    { week: "Week 1", trips: 58 },
+    { week: "Week 2", trips: 73 },
+    { week: "Week 3", trips: 65 },
+    { week: "Week 4", trips: 80 },
+  ];
+
+  // === State for Filter ===
+  const [filter, setFilter] = useState<"weekly" | "monthly">("weekly");
+
   return (
-    // <div className="w-full flex justify-center ">
-       <div className="w-fullflex justify-center pt-20 pb-10 px-4">
-      {/* Main Content Wrapper */}
+    <div className="w-full flex justify-center pt-20 pb-10 px-4">
       <div className="w-full max-w-7xl px-4 sm:px-6 md:px-10 py-8">
         <h2 className="text-2xl font-semibold text-[#7B1E2D] mb-6 text-center">
           Fleet Overview
@@ -68,15 +77,40 @@ export default function DashboardContent() {
           transition={{ delay: 0.5 }}
           className="bg-white p-6 rounded-2xl shadow-lg"
         >
-          <h3 className="text-lg font-semibold text-[#7B1E2D] mb-4 text-center">
-            Weekly Trips Overview
-          </h3>
+          {/* Header & Filter */}
+          <div className="flex flex-col sm:flex-row items-center justify-between mb-4">
+            <h3 className="text-lg font-semibold text-[#7B1E2D] text-center sm:text-left">
+              {filter === "weekly"
+                ? "Weekly Trips Overview"
+                : "Monthly Trips Overview"}
+            </h3>
 
+            {/* Filter Buttons */}
+            <div className="flex gap-2 mt-3 sm:mt-0">
+              {["weekly", "monthly"].map((option) => (
+                <button
+                  key={option}
+                  onClick={() => setFilter(option as "weekly" | "monthly")}
+                  className={`px-4 py-2 rounded-full text-sm font-medium border transition-all ${
+                    filter === option
+                      ? "bg-[#7B1E2D] text-white border-[#7B1E2D]"
+                      : "bg-white text-[#7B1E2D] border-[#7B1E2D]/50 hover:bg-[#7B1E2D]/10"
+                  }`}
+                >
+                  {option === "weekly" ? "Weekly" : "Monthly"}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Chart */}
           <div className="flex justify-center">
             <div className="w-full max-w-3xl">
               <ResponsiveContainer width="100%" height={300}>
-                <BarChart data={tripData}>
-                  <XAxis dataKey="day" />
+                <BarChart
+                  data={filter === "weekly" ? weeklyData : monthlyData}
+                >
+                  <XAxis dataKey={filter === "weekly" ? "day" : "week"} />
                   <YAxis />
                   <Tooltip
                     cursor={{ fill: "#f3f4f6" }}
