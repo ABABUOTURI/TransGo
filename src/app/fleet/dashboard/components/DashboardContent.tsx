@@ -32,7 +32,8 @@ export default function DashboardContent() {
   ];
 
   return (
-    <div className="w-full flex justify-center pt-24 pb-10 px-4">
+    // <div className="w-full flex justify-center ">
+       <div className="w-fullflex justify-center pt-20 pb-10 px-4">
       {/* Main Content Wrapper */}
       <div className="w-full max-w-7xl px-4 sm:px-6 md:px-10 py-8">
         <h2 className="text-2xl font-semibold text-[#7B1E2D] mb-6 text-center">
