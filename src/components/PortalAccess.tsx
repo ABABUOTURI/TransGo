@@ -17,7 +17,7 @@ const portals = [
     description:
       "Manage your vehicles and drivers, access analytics, and grow your business with our powerful fleet tools.",
     buttonText: "Register Your Fleet",
-    buttonLink: "/fleet/register",
+    buttonLink: "/fleet/fleetregister",
     image: "/owner1.png",
   },
   {
