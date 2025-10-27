@@ -50,25 +50,26 @@ export default function DashboardContent() {
         </h2>
 
         {/* === Summary Cards === */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
-          {stats.map((item, idx) => (
-            <motion.div
-              key={idx}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: idx * 0.1 }}
-              className="bg-white shadow-lg rounded-2xl p-6 flex items-center justify-center flex-col sm:flex-row sm:justify-start gap-4 hover:shadow-xl transition"
-            >
-              <div className="bg-[#7B1E2D]/10 text-[#7B1E2D] p-3 rounded-full">
-                <item.icon className="w-6 h-6" />
-              </div>
-              <div className="text-center sm:text-left">
-                <p className="text-gray-500 text-sm">{item.label}</p>
-                <p className="text-xl font-semibold">{item.value}</p>
-              </div>
-            </motion.div>
-          ))}
-        </div>
+        <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+  {stats.map((item, idx) => (
+    <motion.div
+      key={idx}
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: idx * 0.1 }}
+      className="bg-white shadow-lg rounded-2xl p-6 flex items-center justify-center flex-col sm:flex-row sm:justify-start gap-4 hover:shadow-xl transition"
+    >
+      <div className="bg-[#7B1E2D]/10 text-[#7B1E2D] p-3 rounded-full">
+        <item.icon className="w-6 h-6" />
+      </div>
+      <div className="text-center sm:text-left">
+        <p className="text-gray-500 text-sm">{item.label}</p>
+        <p className="text-xl font-semibold">{item.value}</p>
+      </div>
+    </motion.div>
+  ))}
+</div>
+
 
         {/* === Trips Chart === */}
         <motion.div
