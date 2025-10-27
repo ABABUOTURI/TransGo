@@ -9,7 +9,7 @@ const portals = [
     description:
       "Quickly book vehicles, track your shipments in real-time, and manage your delivery history with ease.",
     buttonText: "Book a Delivery",
-    buttonLink: "/customer/book",
+    buttonLink: "/cutomer/book-delivery",
     image: "/customer1.png",
   },
   {
@@ -32,7 +32,9 @@ const portals = [
 
 export default function PortalAccess() {
   return (
-    <section className="py-16 sm:py-20 bg-white px-4 sm:px-6 lg:px-8">
+    <section 
+    id="portal-access"
+    className="py-16 sm:py-20 bg-white px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         {/* === Section Header === */}
         <div className="text-center mb-12 sm:mb-16">
