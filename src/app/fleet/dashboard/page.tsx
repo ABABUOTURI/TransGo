@@ -7,7 +7,7 @@ import DashboardContent from "./components/DashboardContent";
 import VehiclesContent from "./components/VehiclesContent";
 import DriversContent from "./components/DriversContent";
 import TripsContent from "./components/TripsContent";
-import SettingsContent from "./components/SettingsContent";
+import SettingsContent from "./components/settings/SettingsContent";
 
 export default function FleetDashboardPage() {
   const [activeTab, setActiveTab] = useState("dashboard");
