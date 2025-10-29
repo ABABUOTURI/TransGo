@@ -25,7 +25,7 @@ export default function LoginPage() {
       role: "driver",
       email: "driver1@gmail.com",
       password: "driver1",
-      redirect: "/driver-dashboard",
+      redirect: "/driver/dashboard",
     },
     {
       role: "owner",
@@ -276,7 +276,7 @@ export default function LoginPage() {
               Fleet Owner?
             </a>
             <a
-              href="/signup/driver"
+              href="driver/driver-signup"
               className="flex-1 text-center py-2 text-gray-700 font-semibold rounded-lg hover:bg-gray-50 transition-colors duration-300"
             >
               Driver?
