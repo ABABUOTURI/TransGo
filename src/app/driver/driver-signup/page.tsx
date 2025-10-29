@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, ChangeEvent, FormEvent } from "react";
+import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   ArrowLeft,
@@ -15,6 +16,8 @@ import {
 } from "lucide-react";
 
 export default function DriverSignupPage() {
+  const router = useRouter();
+
   const [form, setForm] = useState({
     fullName: "",
     idNumber: "",
@@ -36,7 +39,6 @@ export default function DriverSignupPage() {
     agree: false,
   });
 
-  // === FILE STATES ===
   const [idFile, setIdFile] = useState<File | null>(null);
   const [licenseFile, setLicenseFile] = useState<File | null>(null);
   const [vehicleFile, setVehicleFile] = useState<File | null>(null);
@@ -47,12 +49,10 @@ export default function DriverSignupPage() {
   const [vehiclePreview, setVehiclePreview] = useState<string | null>(null);
   const [profilePreview, setProfilePreview] = useState<string | null>(null);
 
-  // === UI STATES ===
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
 
-  // === CLEANUP PREVIEWS ===
   useEffect(() => {
     return () => {
       [idPreview, licensePreview, vehiclePreview, profilePreview].forEach(
@@ -61,7 +61,6 @@ export default function DriverSignupPage() {
     };
   }, [idPreview, licensePreview, vehiclePreview, profilePreview]);
 
-  // === HANDLE INPUT CHANGES ===
   function handleChange(e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) {
     const { id, value, type, checked } = e.target as HTMLInputElement;
     setForm((prev) => ({
@@ -70,7 +69,6 @@ export default function DriverSignupPage() {
     }));
   }
 
-  // === HANDLE FILE UPLOADS ===
   function handleFileChange(
     e: ChangeEvent<HTMLInputElement>,
     setter: (f: File | null) => void,
@@ -91,12 +89,15 @@ export default function DriverSignupPage() {
     }
   }
 
-  // === HANDLE FORM SUBMIT ===
   function handleSubmit(e: FormEvent) {
     e.preventDefault();
     console.log("Submitting:", { form, idFile, licenseFile, vehicleFile, profileFile });
+
     setShowSuccess(true);
-    setTimeout(() => setShowSuccess(false), 3000);
+    setTimeout(() => {
+      setShowSuccess(false);
+      router.push("/login");
+    }, 3000);
   }
 
   return (
@@ -122,8 +123,7 @@ export default function DriverSignupPage() {
           </p>
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-8">
-          {/* === PERSONAL INFORMATION === */}
+        <form onSubmit={handleSubmit} className="space-y-8 text-black">
           <SectionTitle title="Personal Information" />
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <TextInput
@@ -150,13 +150,13 @@ export default function DriverSignupPage() {
               value={form.dob}
               onChange={handleChange}
               required
-              className="border border-gray-300 rounded-lg px-3 py-2 text-sm w-full"
+              className="border border-gray-300 rounded-lg px-3 py-2 text-sm w-full text-black placeholder-black"
             />
             <select
               id="gender"
               value={form.gender}
               onChange={handleChange}
-              className="border border-gray-300 rounded-lg px-3 py-2 text-sm w-full"
+              className="border border-gray-300 rounded-lg px-3 py-2 text-sm w-full text-black"
             >
               <option value="">Select Gender</option>
               <option value="male">Male</option>
@@ -173,7 +173,6 @@ export default function DriverSignupPage() {
             }
           />
 
-          {/* === CONTACT INFORMATION === */}
           <SectionTitle title="Contact Information" />
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <TextInput
@@ -206,7 +205,6 @@ export default function DriverSignupPage() {
             />
           </div>
 
-          {/* === DRIVING INFORMATION === */}
           <SectionTitle title="Driving Information" />
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <TextInput
@@ -222,7 +220,7 @@ export default function DriverSignupPage() {
               required
               value={form.licenseExpiry}
               onChange={handleChange}
-              className="border border-gray-300 rounded-lg px-3 py-2 text-sm w-full"
+              className="border border-gray-300 rounded-lg px-3 py-2 text-sm w-full text-black placeholder-black"
             />
             <TextInput
               id="experienceYears"
@@ -241,7 +239,6 @@ export default function DriverSignupPage() {
             }
           />
 
-          {/* === VEHICLE INFORMATION === */}
           <SectionTitle title="Vehicle Details" />
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <TextInput
@@ -267,7 +264,6 @@ export default function DriverSignupPage() {
             }
           />
 
-          {/* === PROFILE PHOTO === */}
           <SectionTitle title="Profile Photo (optional)" />
           <FileUpload
             label="Upload Profile Photo"
@@ -278,7 +274,6 @@ export default function DriverSignupPage() {
             }
           />
 
-          {/* === PASSWORD === */}
           <SectionTitle title="Account Credentials" />
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <PasswordInput
@@ -299,7 +294,6 @@ export default function DriverSignupPage() {
             />
           </div>
 
-          {/* === SUBMIT BUTTON === */}
           <motion.button
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
@@ -311,13 +305,10 @@ export default function DriverSignupPage() {
         </form>
       </motion.div>
 
-      {/* SUCCESS MODAL */}
       <Modal show={showSuccess} onClose={() => setShowSuccess(false)}>
         <CheckCircle2 className="w-14 h-14 text-green-600 mx-auto mb-3" />
-        <p className="text-gray-800 font-semibold">Account Created Successfully</p>
-        <p className="text-sm text-gray-600">
-          Demo only — backend not yet connected.
-        </p>
+        <p className="text-gray-800 font-semibold text-lg">Account Created Successfully!</p>
+        <p className="text-sm text-gray-600 mt-1">Redirecting to login page...</p>
       </Modal>
     </div>
   );
@@ -354,7 +345,9 @@ function TextInput({
           onChange={onChange}
           required={required}
           placeholder={placeholder}
-          className={`border border-gray-300 rounded-lg px-3 py-2 text-sm w-full text-black ${icon ? "pl-10" : ""}`}
+          className={`border border-gray-300 rounded-lg px-3 py-2 text-sm w-full text-black placeholder-black ${
+            icon ? "pl-10" : ""
+          }`}
         />
       </div>
     </div>
@@ -365,21 +358,23 @@ function PasswordInput({ id, label, value, onChange, show, toggle }: any) {
   return (
     <div className="relative">
       <label className="block text-sm font-medium text-gray-700 mb-1">{label}</label>
-      <input
-        id={id}
-        type={show ? "text" : "password"}
-        value={value}
-        onChange={onChange}
-        required
-        className="border border-gray-300 rounded-lg px-3 py-2 text-sm w-full text-black pr-10"
-      />
-      <button
-        type="button"
-        onClick={toggle}
-        className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500"
-      >
-        {show ? <EyeOff className="w-4 h-4 mt-5" /> : <Eye className="w-4 h-4 mt-5" />}
-      </button>
+      <div className="relative">
+        <input
+          id={id}
+          type={show ? "text" : "password"}
+          value={value}
+          onChange={onChange}
+          required
+          className="border border-gray-300 rounded-lg px-3 py-2 text-sm w-full text-black placeholder-black pr-10"
+        />
+        <button
+          type="button"
+          onClick={toggle}
+          className="absolute inset-y-0 right-3 flex items-center justify-center text-gray-500 hover:text-red-700 transition"
+        >
+          {show ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+        </button>
+      </div>
     </div>
   );
 }
@@ -448,7 +443,7 @@ function Modal({
             {children}
             <button
               onClick={onClose}
-              className="mt-4 w-full bg-red-700 text-white py-2 rounded"
+              className="mt-4 w-full bg-red-700 text-white py-2 rounded hover:bg-red-800 transition"
             >
               Close
             </button>
