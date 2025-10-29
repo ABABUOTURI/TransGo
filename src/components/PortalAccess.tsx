@@ -25,7 +25,7 @@ const portals = [
     description:
       "Access available jobs, manage deliveries, and track earnings. (Note: Fleet Owners must register their drivers).",
     buttonText: "Access Driver Portal",
-    buttonLink: "/driver/portal",
+    buttonLink: "/login",
     image: "/truck4.png",
   },
 ];
