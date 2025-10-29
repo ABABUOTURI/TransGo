@@ -31,7 +31,7 @@ export default function TripCard({
     // Navigate after short delay
     setTimeout(() => {
       setShowAlert(false);
-      router.push(`/trips/${trip.id}`);
+      router.push(`/driver/trips/${trip.id}`);
     }, 1200);
   };
 
