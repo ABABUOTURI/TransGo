@@ -25,9 +25,9 @@ export default function TopNav() {
   const loginOptions = [
     { label: "Login", href: "/login" },
     { label: "Customer Signup", href: "/signup/customer" },
-    { label: "Fleet Owner Signup", href: "/signup/fleet-owner" },
+    { label: "Fleet Owner Signup", href: "/fleet/fleetregister" },
     { label: "Admin Panel", href: "/admin" },
-    { label: "Driver Portal", href: "/driver/portal" },
+    { label: "Driver Portal", href: "/auth/driver-signup" },
   ];
 
   return (
