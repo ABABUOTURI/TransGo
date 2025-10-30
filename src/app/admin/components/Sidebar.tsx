@@ -102,6 +102,11 @@ export default function Sidebar({ open, onClose }: SidebarProps) {
             <LogOut size={18} className="mr-2" />
             Logout
           </button>
+          <br />
+          {/* Footer */}
+        <div className="px-4 pb-4 text-xs text-white/70">
+          © {new Date().getFullYear()} TransGo
+        </div>
         </div>
       </aside>
     </>
