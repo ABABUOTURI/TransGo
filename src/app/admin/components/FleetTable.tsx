@@ -61,7 +61,7 @@ export default function FleetTable() {
             placeholder="Search fleet by name or ID..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="flex-1 outline-none text-sm bg-gray-400 text-white px-2 py-2 border -rounded-lg"
+            className="flex-1 outline-none text-sm bg-gray-400 text-white px-2 py-2 border rounded-lg"
           />
         </div>
 
