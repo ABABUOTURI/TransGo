@@ -69,13 +69,13 @@ export default function UserTable() {
       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
         {/* Search */}
         <div className="flex items-center gap-3 border rounded-lg px-3 py-2 w-full md:w-1/3">
-          <Search className="w-4 h-4 text-gray-400" />
+          <Search className="w-4 h-4 text-gray-600" />
           <input
             type="text"
             placeholder="Search users..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="flex-1 outline-none text-sm"
+            className="flex-1 outline-none text-sm bg-gray-400 text-white px-2 py-2 border rounded-lg"
           />
         </div>
 
@@ -84,20 +84,22 @@ export default function UserTable() {
           <select
             value={roleFilter}
             onChange={(e) => setRoleFilter(e.target.value)}
-            className="border rounded-lg px-3 py-2 text-sm outline-none bg-white"
+            className=" border rounded-lg px-3 py-2 text-sm outline-none bg-gray-400 text-white"
           >
             {roles.map((r) => (
-              <option key={r}>{r}</option>
+              <option key={r} 
+              className="px-2 py-2 border rounded-lg w-6"
+              >{r}</option>
             ))}
           </select>
 
           <select
             value={statusFilter}
             onChange={(e) => setStatusFilter(e.target.value)}
-            className="border rounded-lg px-3 py-2 text-sm outline-none bg-white"
+            className=" border rounded-lg px-4 py-2 text-sm outline-none bg-gray-400 text-white"
           >
             {statuses.map((s) => (
-              <option key={s}>{s}</option>
+              <option key={s} className="px-2 py-2 border rounded-lg w-6">{s}</option>
             ))}
           </select>
         </div>
@@ -107,14 +109,14 @@ export default function UserTable() {
       <div className="overflow-x-auto">
         <table className="w-full border-collapse text-sm">
           <thead>
-            <tr className="text-left bg-gray-100">
-              <th className="p-3 font-medium text-gray-700">User ID</th>
-              <th className="p-3 font-medium text-gray-700">Name</th>
-              <th className="p-3 font-medium text-gray-700">Email</th>
-              <th className="p-3 font-medium text-gray-700">Role</th>
-              <th className="p-3 font-medium text-gray-700">Status</th>
-              <th className="p-3 font-medium text-gray-700">Joined</th>
-              <th className="p-3 font-medium text-gray-700 text-right">Action</th>
+            <tr className="text-left bg-[#7B1E2D] ">
+              <th className="p-3 font-medium text-white">User ID</th>
+              <th className="p-3 font-medium text-white">Name</th>
+              <th className="p-3 font-medium text-white">Email</th>
+              <th className="p-3 font-medium text-white">Role</th>
+              <th className="p-3 font-medium text-white">Status</th>
+              <th className="p-3 font-medium text-white">Joined</th>
+              <th className="p-3 font-medium text-white text-right">Action</th>
             </tr>
           </thead>
           <tbody>
