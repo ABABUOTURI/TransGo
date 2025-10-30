@@ -15,8 +15,8 @@ export default function UsersPage() {
           </p>
         </div>
 
-        <button className="flex items-center gap-2 bg-[#7B1E2D] text-white px-4 py-2 rounded-lg hover:bg-[#641824] transition">
-          <Filter className="w-4 h-4" /> Filter Options
+        <button className="flex items-center gap-2 bg-[#7B1E2D] text-white px-2 py-2 rounded-lg hover:bg-[#641824] transition">
+          <Filter className="w-2 h-2" /> Filter Options
         </button>
       </div>
 
