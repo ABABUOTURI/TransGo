@@ -1,84 +1,63 @@
 "use client";
 
-import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import DashboardCard from "../admin/components/DashboardCard";
+import { Users, Truck, CreditCard, MapPin } from "lucide-react";
 
 export default function AdminDashboard() {
-  const router = useRouter();
-  const [isVerified, setIsVerified] = useState(false);
-
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      const role = localStorage.getItem("userRole");
-      if (role !== "admin") {
-        router.replace("/login"); // use replace to prevent back nav
-      } else {
-        setIsVerified(true); // user is admin
-      }
-    }
-  }, [router]);
-
-  // ⏳ Show loading while verifying
-  if (!isVerified) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-100 text-gray-700">
-        Checking admin credentials...
-      </div>
-    );
-  }
+  const stats = [
+    {
+      title: "Total Users",
+      value: "1,245",
+      icon: <Users className="w-5 h-5 text-[#7B1E2D]" />,
+      color: "bg-red-50",
+    },
+    {
+      title: "Active Trips",
+      value: "84",
+      icon: <MapPin className="w-5 h-5 text-[#7B1E2D]" />,
+      color: "bg-yellow-50",
+    },
+    {
+      title: "Registered Trucks",
+      value: "312",
+      icon: <Truck className="w-5 h-5 text-[#7B1E2D]" />,
+      color: "bg-blue-50",
+    },
+    {
+      title: "Total Revenue",
+      value: "$18,560",
+      icon: <CreditCard className="w-5 h-5 text-[#7B1E2D]" />,
+      color: "bg-green-50",
+    },
+  ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-red-50 via-white to-gray-50 flex flex-col">
-      {/* === Top Bar === */}
-      <header className="w-full bg-red-800 text-white py-4 px-6 flex justify-between items-center shadow-md">
-        <h1 className="text-xl font-bold">TransGo Admin Dashboard</h1>
-        <button
-          onClick={() => {
-            localStorage.removeItem("userRole");
-            router.push("/login");
-          }}
-          className="bg-white text-red-800 font-semibold px-4 py-2 rounded-lg hover:bg-red-100 transition-colors"
-        >
-          Logout
-        </button>
-      </header>
-
-      {/* === Main Content === */}
-      <main className="flex-1 flex flex-col items-center justify-center p-6 text-center">
-        <h2 className="text-2xl font-semibold text-gray-800 mb-4">
-          Welcome, Admin 👋
-        </h2>
-        <p className="text-gray-600 max-w-md">
-          This is your main admin dashboard. From here you’ll be able to manage
-          users, trips, fleet data, and view system reports.
+    <div className="space-y-6">
+      {/* Page Header */}
+      <div>
+        <h1 className="text-2xl font-semibold text-gray-800">Dashboard</h1>
+        <p className="text-sm text-gray-500">
+          Overview of TransGo system statistics and performance
         </p>
+      </div>
 
-        <div className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-4 w-full max-w-4xl">
-          <div className="bg-white shadow-lg rounded-xl p-6 border border-gray-100">
-            <h3 className="text-lg font-semibold text-red-800 mb-2">
-              Registered Users
-            </h3>
-            <p className="text-2xl font-bold text-gray-800">324</p>
-          </div>
-          <div className="bg-white shadow-lg rounded-xl p-6 border border-gray-100">
-            <h3 className="text-lg font-semibold text-red-800 mb-2">
-              Active Trips
-            </h3>
-            <p className="text-2xl font-bold text-gray-800">58</p>
-          </div>
-          <div className="bg-white shadow-lg rounded-xl p-6 border border-gray-100">
-            <h3 className="text-lg font-semibold text-red-800 mb-2">
-              Fleet Owners
-            </h3>
-            <p className="text-2xl font-bold text-gray-800">42</p>
-          </div>
-        </div>
-      </main>
+      {/* Stats Grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {stats.map((item, index) => (
+          <DashboardCard
+            key={index}
+            title={item.title}
+            value={item.value}
+            icon={item.icon}
+            color={item.color}
+          />
+        ))}
+      </div>
 
-      {/* === Footer === */}
-      <footer className="bg-red-800 text-white text-sm py-3 text-center">
-        © {new Date().getFullYear()} TransGo Admin Panel. All rights reserved.
-      </footer>
+      {/* Placeholder for charts or analytics */}
+      <div className="mt-10 bg-white border rounded-xl shadow-sm p-6 text-center text-gray-500">
+        📊 Analytics & Reports will appear here.
+      </div>
     </div>
   );
 }
