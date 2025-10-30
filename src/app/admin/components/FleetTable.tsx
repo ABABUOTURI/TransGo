@@ -61,7 +61,7 @@ export default function FleetTable() {
             placeholder="Search fleet by name or ID..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="flex-1 outline-none text-sm"
+            className="flex-1 outline-none text-sm bg-gray-400 text-white px-2 py-2 border -rounded-lg"
           />
         </div>
 
@@ -70,7 +70,7 @@ export default function FleetTable() {
           <select
             value={filter}
             onChange={(e) => setFilter(e.target.value)}
-            className="border rounded-lg px-3 py-2 text-sm outline-none bg-white"
+            className="border rounded-lg px-3 py-2 text-sm outline-none bg-gray-400 text-white"
           >
             {statuses.map((status) => (
               <option key={status}>{status}</option>
@@ -83,14 +83,14 @@ export default function FleetTable() {
       <div className="overflow-x-auto">
         <table className="w-full border-collapse text-sm">
           <thead>
-            <tr className="text-left bg-gray-100">
-              <th className="p-3 font-medium text-gray-700">Fleet ID</th>
-              <th className="p-3 font-medium text-gray-700">Owner</th>
-              <th className="p-3 font-medium text-gray-700">Contact</th>
-              <th className="p-3 font-medium text-gray-700">Location</th>
-              <th className="p-3 font-medium text-gray-700">Trucks</th>
-              <th className="p-3 font-medium text-gray-700">Status</th>
-              <th className="p-3 font-medium text-gray-700 text-right">Action</th>
+            <tr className="text-left bg-[#7B1E2D]">
+              <th className="p-3 font-medium text-white">Fleet ID</th>
+              <th className="p-3 font-medium text-white">Owner</th>
+              <th className="p-3 font-medium text-white">Contact</th>
+              <th className="p-3 font-medium text-white">Location</th>
+              <th className="p-3 font-medium text-white">Trucks</th>
+              <th className="p-3 font-medium text-white">Status</th>
+              <th className="p-3 font-medium text-white text-right">Action</th>
             </tr>
           </thead>
           <tbody>
