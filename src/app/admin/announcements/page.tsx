@@ -47,9 +47,9 @@ export default function AnnouncementsPage() {
         </h1>
         <button
           onClick={() => setShowForm(true)}
-          className="flex items-center gap-2 bg-[#7B1E2D] text-white px-4 py-2 rounded-lg hover:bg-[#641824] transition"
+          className="flex items-center gap-1 bg-[#7B1E2D] text-white px-2 py-2 rounded-lg hover:bg-[#641824] transition"
         >
-          <Plus className="w-4 h-4" /> New Announcement
+          <Plus className="w-4 h-4" /> New 
         </button>
       </div>
 
