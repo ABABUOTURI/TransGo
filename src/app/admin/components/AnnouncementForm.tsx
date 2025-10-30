@@ -86,7 +86,7 @@ export default function AnnouncementForm({
                   name="title"
                   value={formData.title}
                   onChange={handleChange}
-                  className="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-[#7B1E2D] outline-none"
+                  className="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-[#7B1E2D] outline-none bg-gray-400 text-white"
                   placeholder="Enter announcement title"
                 />
               </div>
@@ -100,7 +100,7 @@ export default function AnnouncementForm({
                   value={formData.message}
                   onChange={handleChange}
                   rows={4}
-                  className="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-[#7B1E2D] outline-none"
+                  className="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-[#7B1E2D] outline-none bg-gray-400 text-white"
                   placeholder="Write announcement message..."
                 />
               </div>
@@ -113,7 +113,7 @@ export default function AnnouncementForm({
                   name="audience"
                   value={formData.audience}
                   onChange={handleChange}
-                  className="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-[#7B1E2D] outline-none"
+                  className="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-[#7B1E2D] outline-none bg-gray-400 text-white"
                 >
                   <option>All Users</option>
                   <option>Drivers</option>
