@@ -2,7 +2,19 @@
 
 import { usePathname } from "next/navigation";
 import Link from "next/link";
-import { X, LayoutDashboard, Users, Truck, CreditCard, FileText, Megaphone, Settings, LogOut } from "lucide-react";
+import {
+  X,
+  LayoutDashboard,
+  Users,
+  Truck,
+  CreditCard,
+  FileText,
+  Megaphone,
+  Settings,
+  Bell,
+  User,
+  LogOut,
+} from "lucide-react";
 
 interface SidebarProps {
   open: boolean;
@@ -20,36 +32,43 @@ export default function Sidebar({ open, onClose }: SidebarProps) {
     { name: "Payments", href: "/admin/payments", icon: CreditCard },
     { name: "Logs", href: "/admin/logs", icon: FileText },
     { name: "Announcements", href: "/admin/announcements", icon: Megaphone },
+    { name: "Notifications", href: "/admin/notifications", icon: Bell },
+    { name: "Profile", href: "/admin/profile", icon: User },
     { name: "Settings", href: "/admin/settings", icon: Settings },
   ];
 
   return (
     <>
-      {/* Mobile overlay */}
+      {/* === Mobile overlay === */}
       {open && (
         <div
-          className="fixed inset-0  bg-opacity-40 z-40 "
+          className="fixed inset-0 bg-black/40 backdrop-blur-sm z-40"
           onClick={onClose}
         ></div>
       )}
 
-      {/* Sidebar container */}
+      {/* === Sidebar container === */}
       <aside
-        className={`fixed top-0 left-0 z-50 w-56 h-full bg-white shadow-lg transform transition-transform duration-300 
-        ${open ? "translate-x-0" : "-translate-x-full"} md:translate-x-0`}
+        className={`fixed top-0 left-0 z-50 w-60 h-full 
+        bg-[#7B1E2D]/60 backdrop-blur-xl border-r border-white/10 shadow-lg 
+        transform transition-transform duration-300 
+        ${open ? "translate-x-0" : "-translate-x-full"} 
+        md:translate-x-0`}
       >
-        {/* Logo + close button */}
-        <div className="flex items-center justify-between p-4 border-b">
-          <h1 className="text-xl font-bold text-[#7B1E2D]">TransGo Admin</h1>
+        {/* === Logo + Close button === */}
+        <div className="flex items-center justify-between p-4 border-b border-white/10">
+          <h1 className="text-lg font-bold text-white tracking-wide">
+            Admin Panel
+          </h1>
           <button
-            className="md:hidden text-gray-600 hover:text-gray-900"
+            className="md:hidden text-white/80 hover:text-white transition"
             onClick={onClose}
           >
             <X size={20} />
           </button>
         </div>
 
-        {/* Navigation links */}
+        {/* === Navigation links === */}
         <nav className="p-4 space-y-1">
           {links.map(({ name, href, icon: Icon }) => {
             const active = pathname === href;
@@ -57,10 +76,11 @@ export default function Sidebar({ open, onClose }: SidebarProps) {
               <Link
                 key={name}
                 href={href}
-                className={`flex items-center px-3 py-2 rounded-md text-sm font-medium transition-colors
-                ${active
-                  ? "bg-[#7B1E2D]/10 text-[#7B1E2D]"
-                  : "text-gray-700 hover:bg-gray-100 hover:text-[#7B1E2D]"
+                className={`flex items-center px-3 py-2 rounded-lg text-sm font-medium transition-all
+                ${
+                  active
+                    ? "bg-white/20 text-white shadow-sm"
+                    : "text-white/80 hover:bg-white/10 hover:text-white"
                 }`}
                 onClick={onClose}
               >
@@ -71,11 +91,13 @@ export default function Sidebar({ open, onClose }: SidebarProps) {
           })}
         </nav>
 
-        {/* Bottom logout section */}
-        <div className="absolute bottom-0 w-full border-t p-4">
+        {/* === Bottom Logout section === */}
+        <div className="absolute bottom-0 w-full border-t border-white/10 p-4">
           <button
-            className="flex items-center text-sm font-medium text-gray-700 hover:text-[#7B1E2D]"
-            onClick={() => alert("Logout feature coming soon")}
+            className="flex items-center text-sm font-medium text-white/80 hover:text-white transition"
+            onClick={() =>
+              alert("Logout feature coming soon")
+            }
           >
             <LogOut size={18} className="mr-2" />
             Logout
