@@ -71,7 +71,7 @@ export default function LogsTable() {
             placeholder="Search logs by user or action..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="flex-1 outline-none text-sm"
+            className="flex-1 outline-none text-sm bg-gray-400 border rounded-lg px-2 py-2"
           />
         </div>
 
@@ -79,7 +79,7 @@ export default function LogsTable() {
           <select
             value={filter}
             onChange={(e) => setFilter(e.target.value)}
-            className="border rounded-lg px-3 py-2 text-sm outline-none bg-white"
+            className="border rounded-lg px-3 py-2 text-sm outline-none bg-gray-400"
           >
             {severities.map((s) => (
               <option key={s}>{s}</option>
@@ -92,13 +92,13 @@ export default function LogsTable() {
       <div className="overflow-x-auto">
         <table className="w-full border-collapse text-sm">
           <thead>
-            <tr className="text-left bg-gray-100">
-              <th className="p-3 font-medium text-gray-700">User</th>
-              <th className="p-3 font-medium text-gray-700">Role</th>
-              <th className="p-3 font-medium text-gray-700">Action</th>
-              <th className="p-3 font-medium text-gray-700">Category</th>
-              <th className="p-3 font-medium text-gray-700">Date</th>
-              <th className="p-3 font-medium text-gray-700">Severity</th>
+            <tr className="text-left bg-[#7B1E2D]">
+              <th className="p-3 font-medium text-white">User</th>
+              <th className="p-3 font-medium text-white">Role</th>
+              <th className="p-3 font-medium text-white">Action</th>
+              <th className="p-3 font-medium text-white">Category</th>
+              <th className="p-3 font-medium text-white">Date</th>
+              <th className="p-3 font-medium text-white">Severity</th>
             </tr>
           </thead>
 
