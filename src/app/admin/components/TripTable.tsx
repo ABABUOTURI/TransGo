@@ -69,13 +69,13 @@ export default function TripTable() {
       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
         {/* Search */}
         <div className="flex items-center gap-3 border rounded-lg px-3 py-2 w-full md:w-1/3">
-          <Search className="w-4 h-4 text-gray-400" />
+          <Search className="w-4 h-4 text-gray-600" />
           <input
             type="text"
             placeholder="Search by Trip ID or Customer..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="flex-1 outline-none text-sm"
+            className="flex-1 outline-none text-sm bg-gray-400 text-white px-2 py-2 border rounded-lg"
           />
         </div>
 
@@ -84,7 +84,7 @@ export default function TripTable() {
           <select
             value={statusFilter}
             onChange={(e) => setStatusFilter(e.target.value)}
-            className="border rounded-lg px-3 py-2 text-sm outline-none bg-white"
+            className="border rounded-lg px-3 py-2 text-sm outline-none bg-gray-400 text-white"
           >
             {statuses.map((status) => (
               <option key={status}>{status}</option>
@@ -97,15 +97,15 @@ export default function TripTable() {
       <div className="overflow-x-auto">
         <table className="w-full border-collapse text-sm">
           <thead>
-            <tr className="text-left bg-gray-100">
-              <th className="p-3 font-medium text-gray-700">Trip ID</th>
-              <th className="p-3 font-medium text-gray-700">Customer</th>
-              <th className="p-3 font-medium text-gray-700">Origin</th>
-              <th className="p-3 font-medium text-gray-700">Destination</th>
-              <th className="p-3 font-medium text-gray-700">Driver</th>
-              <th className="p-3 font-medium text-gray-700">Status</th>
-              <th className="p-3 font-medium text-gray-700">Date</th>
-              <th className="p-3 font-medium text-gray-700 text-right">Action</th>
+            <tr className="text-left bg-[#7B1E2D] ">
+              <th className="p-3 font-medium text-white">Trip ID</th>
+              <th className="p-3 font-medium text-white">Customer</th>
+              <th className="p-3 font-medium text-white">Origin</th>
+              <th className="p-3 font-medium text-white">Destination</th>
+              <th className="p-3 font-medium text-white">Driver</th>
+              <th className="p-3 font-medium text-white">Status</th>
+              <th className="p-3 font-medium text-white">Date</th>
+              <th className="p-3 font-medium text-white text-right">Action</th>
             </tr>
           </thead>
           <tbody>
