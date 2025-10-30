@@ -38,7 +38,7 @@ export default function SettingsPage() {
         </div>
 
         {/* Main Settings Panel */}
-        <div className="flex-1 bg-white rounded-xl shadow p-6">
+        <div className="flex-1 bg-black/40 rounded-xl shadow p-6">
           {activeTab === "profile" && <ProfileSettings />}
           {activeTab === "preferences" && <SystemPreferences />}
           {activeTab === "security" && <SecuritySettings />}

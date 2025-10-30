@@ -1,13 +1,13 @@
 "use client";
 
 import { useState } from "react";
-import TopNav from "./components/TopNav";
-import Sidebar from "./components/Sidebar";
-import DashboardContent from "./components/DashboardContent";
-import VehiclesContent from "./components/VehiclesContent";
-import DriversContent from "./components/DriversContent";
-import TripsContent from "./components/TripsContent";
-import SettingsContent from "./components/settings/SettingsContent";
+import TopNav from "../components/TopNav";
+import Sidebar from "../components/Sidebar";
+import DashboardContent from "../components/DashboardContent";
+import VehiclesContent from "../components/VehiclesContent";
+import DriversContent from "../components/DriversContent";
+import TripsContent from "../components/TripsContent";
+import SettingsContent from "../components/settings/SettingsContent";
 
 export default function FleetDashboardPage() {
   const [activeTab, setActiveTab] = useState("dashboard");
