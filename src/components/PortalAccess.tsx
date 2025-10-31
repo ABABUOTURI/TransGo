@@ -9,7 +9,7 @@ const portals = [
     description:
       "Quickly book vehicles, track your shipments in real-time, and manage your delivery history with ease.",
     buttonText: "Book a Delivery",
-    buttonLink: "/cutomer/book-delivery",
+    buttonLink: "/customer/book",
     image: "/customer1.png",
   },
   {
@@ -17,7 +17,7 @@ const portals = [
     description:
       "Manage your vehicles and drivers, access analytics, and grow your business with our powerful fleet tools.",
     buttonText: "Register Your Fleet",
-    buttonLink: "/fleet/fleetregister",
+    buttonLink: "/auth/fleetregister",
     image: "/owner1.png",
   },
   {
