@@ -116,7 +116,7 @@ export default function CustomerDashboard() {
       <section className="mt-6">
         <h2 className="text-xl font-semibold mb-3">Live Map Overview</h2>
         <div className="w-full h-64 bg-white/10 backdrop-blur-lg rounded-xl shadow-lg flex items-center justify-center text-gray-200">
-          <p>🗺️ Map preview (coming soon)</p>
+          <p>Map preview (coming soon)</p>
         </div>
       </section>
     </main>
