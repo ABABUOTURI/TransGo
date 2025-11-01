@@ -28,7 +28,7 @@ export default function CustomerLayout({
       </div>
 
       {/* Background overlay for effects */}
-      <div className="fixed inset-0 -z-10 bg-[url('/truck-bg.png')] bg-cover bg-center opacity-10"></div>
+      <div className="fixed inset-0 -z-10 bg-[url('/truck4.png')] bg-cover bg-center opacity-10"></div>
     </div>
   );
 }
